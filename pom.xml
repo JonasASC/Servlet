@@ -49,8 +49,7 @@
 		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
 
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
-
-
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
