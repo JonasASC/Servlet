@@ -21,6 +21,7 @@ import de.asc.exceptions.IllegalRequest;
 import de.asc.exceptions.UserNotAuthenticatedException;
 import de.asc.ttp.ActiveProjectView;
 import de.asc.ttp.Customer;
+import de.asc.ttp.DateTime;
 import de.asc.ttp.Login;
 import de.asc.ttp.Projects;
 import de.asc.ttp.Tracker;
@@ -33,7 +34,7 @@ import de.asc.ttp.model.ProjectInfoRequest;
 public class TimePro {
 	private Long userid = null;
 	protected Logger logger = Logger.getLogger(TimePro.class.getName());
-	private Tracker timeSlices = null;
+	
 
 	/**
 	 * 
@@ -47,6 +48,7 @@ public class TimePro {
 		HttpSession session = req.getSession(false);
 		if (session != null)
 			userid = (Long) session.getAttribute("userid");
+			
 	}
 
 	@GET
@@ -56,7 +58,7 @@ public class TimePro {
 			initSess(req);
 
 			Projects p = new Projects();
-			logger.info("hier " + userid);
+			logger.info("ProjecteList from UserId = " + userid);
 			return Response.ok(new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()
 					.toJson(p.getProjectlistbyeUser(userid))).build();
 		} catch (IllegalArgumentException | SQLException e) {
@@ -73,7 +75,7 @@ public class TimePro {
 			initSess(req);
 
 			ActiveProjectView a = new ActiveProjectView();
-			logger.info("hier " + userid);
+			logger.info("Activelist from UserId " + userid);
 			return Response.ok(new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()
 					.toJson(a.getActiveProjectlistbyeUser(userid))).build();
 		} catch (IllegalArgumentException | SQLException e) {
@@ -82,6 +84,7 @@ public class TimePro {
 		}
 		return null;
 	}
+
 
 	@POST
 	@Path("/addProject")
@@ -135,6 +138,27 @@ public class TimePro {
 			return Response.status(599).entity(new ErrorResponse(599, e).toJson()).build();
 		}
 	}
+	
+	@GET
+	@Path("/getTracker/{id}")
+	@Consumes("application/json")
+	public Response getTracker(@Context HttpServletRequest req, @PathParam("id") Long projectId) 
+			throws IllegalAccessException, IllegalArgumentException, SQLException {
+		initSess(req);
+		try {
+			DateTime a = new DateTime();
+			logger.info("Tracker from ProjectId " + projectId);
+			return Response.ok(new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()
+					.toJson(a.getDateTimebyeProjectid(projectId))).build();
+		} catch (IllegalArgumentException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 	
 	@POST
 	@Path("/deleteProject")

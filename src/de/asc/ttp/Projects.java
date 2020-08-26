@@ -30,7 +30,7 @@ public class Projects extends Table {
 	public Integer budget = 0;
 	@DBExpose
 	@Expose
-	public PGInterval projecttime;
+	public Integer projecttime;
 	
 	
 	
@@ -64,10 +64,10 @@ public class Projects extends Table {
 	public void setContract(String contract) {
 		this.contract = contract;
 	}
-	public PGInterval getProjecttime() {
+	public Integer getProjecttime() {
 		return projecttime;
 	}
-	public void setProjectTime(PGInterval projecttime) {
+	public void setProjectTime(Integer projecttime) {
 		this.projecttime = projecttime;
 	}
 	public Projects() throws SQLException, IllegalArgumentException, IllegalAccessException {

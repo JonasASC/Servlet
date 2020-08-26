@@ -134,7 +134,7 @@ public class Table extends Database {
 		}
 		
 		selectSql += " from " + tablename + " where " + where;
-		logger.info("preparing select statement: " + selectSql);
+		//logger.info("preparing select statement: " + selectSql);
 		selectStmt = connection.prepareStatement(selectSql);
 	}
 
@@ -204,7 +204,7 @@ public class Table extends Database {
 			fieldValues += "?";
 		}
 		insertSql += fieldNames + ") values (" + fieldValues + ")";
-		logger.info("preparing insert statement: " + insertSql);
+		//logger.info("preparing insert statement: " + insertSql);
 		insertStmt = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
 	}
 
@@ -218,7 +218,7 @@ public class Table extends Database {
 			updateSql += dbfields.get(i).getName() + " = ?";
 		}
 		updateSql += " where id = ?";
-		logger.info("preparing update statement: " + updateSql);
+		//logger.info("preparing update statement: " + updateSql);
 		updateStmt = connection.prepareStatement(updateSql);
 	}
 
