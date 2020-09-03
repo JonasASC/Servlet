@@ -208,6 +208,21 @@ public class TimePro {
 		}
 		return Response.status(201).entity(pro.toJson()).build();
 	}
+	
+	@POST
+	@Path("/updateTimeSlices")
+	@Consumes("application/json")
+	public Response updateTimeSlices(@Context HttpServletRequest req, DateTime da)
+		throws IllegalArgumentException, IllegalAccessException, SQLException {
+		initSess(req);
+		try {
+			logger.info("updating TimeSlices");
+			da.update();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "could not update Timeslices at database: " + e.getMessage(), e);
+		}
+		return Response.status(201).entity(da.toJson()).build();
+	}
 
 	@POST
 	@Path("/startTs")

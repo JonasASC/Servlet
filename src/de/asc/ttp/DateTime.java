@@ -11,7 +11,8 @@ import de.asc.db.Table;
 
 public class DateTime extends Table {
 	private static final String TABLENAME = "timeslices";
-
+	
+	
 	@DBExpose
 	@Expose
 	public Long userid;
